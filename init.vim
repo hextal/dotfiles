@@ -62,9 +62,21 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "tab completion
 Plug 'ervandew/supertab'
+
+
+
+
+"colorscheme
+Plug 'crusoexia/vim-monokai'
+"transparency
+Plug  'miyakogi/seiya.vim'
+" Default value: ['ctermbg']
+let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+let g:seiya_auto_enable=1
+
 call plug#end()
-
-
+"""""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
+colorscheme monokai 
 
 
 
@@ -75,6 +87,7 @@ set relativenumber
 set number 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tabs and spaces
+set smarttab
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -107,7 +120,7 @@ function! NERDTreeQuit()
 endfunction
 autocmd WinEnter * call NERDTreeQuit()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"move splits with arrow keys 
+"move splits with hjkl keys 
     tnoremap <c-h> <C-\><C-n><C-w>h
     tnoremap <c-j> <C-\><C-n><C-w>j
     tnoremap <c-k> <C-\><C-n><C-w>k
@@ -128,8 +141,8 @@ set hlsearch
 "nerd tree toggle
 map <F1> :NERDTreeToggle<CR>
 " set a map leader for more key combos
- let mapleader = ','
- let g:mapleader = ','
+ let mapleader ="\<Space>" 
+ let g:mapleader = "\<Space>"
 set history=1000 " change history to 1000
 set textwidth=120
 " code folding settings
@@ -152,7 +165,7 @@ set nolazyredraw " don't redraw while executing macros
 " switch syntax highlighting on
 syntax on
 syntax enable
-set encoding=utf8
+"set encoding=utf8
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256
 if $COLORTERM == 'gnome-terminal'
@@ -163,7 +176,6 @@ endif
 
 set background=dark
 set termguicolors
-colorscheme one
 set autoindent " automatically set indent of new line
 set smartindent
 
@@ -214,6 +226,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 highlight Pmenu guibg=brown gui=bold
 highlight Pmenu ctermbg=238 gui=bold
+" hi Normal ctermbg=none
 "disable search highlighting 
 nnoremap <CR> :noh<CR><CR>
 "reload vim without closing
@@ -232,5 +245,41 @@ set splitright
 "remove trailing whitespaces
 autocmd BufWritePre *.py :%s/\s\+$//e
 
-"transparent vim 
-hi Normal          ctermfg=252 ctermbg=none
+"inset semicolon to end of the line 
+inoremap <leader>; <C-o>A;
+" disable Ex mode
+noremap Q <NOP>
+" Disable stupid backup and swap files - they trigger too many events
+" for file system watchers
+set nobackup
+set nowritebackup
+set noswapfile
+" make yank copy to the global system clipboard
+set clipboard=unnamed
+
+"move in insert mode 
+inoremap <a-h> <left>
+inoremap <a-j> <down>
+inoremap <a-k> <up>
+inoremap <a-l> <right>
+
+" "make colorscheme transparent
+" function! AdaptColorscheme()
+"     highlight clear CursorLine
+"     highlight Normal ctermbg=none
+"     highlight LineNr ctermbg=none
+"     highlight Folded ctermbg=none
+"     highlight NonText ctermbg=none
+"     highlight SpecialKey ctermbg=none
+"     highlight VertSplit ctermbg=none
+"     highlight SignColumn ctermbg=none
+" endfunction
+" autocmd ColorScheme * call AdaptColorscheme()
+"
+" hi Normal ctermbg=none
+" hi NonText ctermbg=none
+" hi LineNr ctermbg=none
+
+"stop delays
+set timeoutlen=1000 ttimeoutlen=0
+
