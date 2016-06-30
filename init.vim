@@ -17,7 +17,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'szw/vim-maximizer'
@@ -120,15 +120,15 @@ function! NERDTreeQuit()
 endfunction
 autocmd WinEnter * call NERDTreeQuit()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"move splits with hjkl keys 
-    tnoremap <c-h> <C-\><C-n><C-w>h
-    tnoremap <c-j> <C-\><C-n><C-w>j
-    tnoremap <c-k> <C-\><C-n><C-w>k
-    tnoremap <c-l> <C-\><C-n><C-w>l
-    nnoremap <c-h> <C-w>h
-    nnoremap <c-j> <C-w>j
-    nnoremap <c-k> <C-w>k
-    nnoremap <c-l> <C-w>l
+ "move splits with hjkl keys 
+"     tnoremap <c-h> <C-\><C-n><C-w>h
+"     tnoremap <c-j> <C-\><C-n><C-w>j
+"     tnoremap <c-k> <C-\><C-n><C-w>k
+"     tnoremap <c-l> <C-\><C-n><C-w>l
+"     nnoremap <c-h> <C-w>h
+"     nnoremap <c-j> <C-w>j
+"     nnoremap <c-k> <C-w>k
+"     nnoremap <c-l> <C-w>l
 """""""""""""""""""""""""""""""""""""""""""
 " Ali: to indent json files on save
 autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
@@ -263,23 +263,5 @@ inoremap <a-j> <down>
 inoremap <a-k> <up>
 inoremap <a-l> <right>
 
-" "make colorscheme transparent
-" function! AdaptColorscheme()
-"     highlight clear CursorLine
-"     highlight Normal ctermbg=none
-"     highlight LineNr ctermbg=none
-"     highlight Folded ctermbg=none
-"     highlight NonText ctermbg=none
-"     highlight SpecialKey ctermbg=none
-"     highlight VertSplit ctermbg=none
-"     highlight SignColumn ctermbg=none
-" endfunction
-" autocmd ColorScheme * call AdaptColorscheme()
-"
-" hi Normal ctermbg=none
-" hi NonText ctermbg=none
-" hi LineNr ctermbg=none
-
 "stop delays
 set timeoutlen=1000 ttimeoutlen=0
-
