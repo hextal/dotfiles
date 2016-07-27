@@ -116,3 +116,5 @@ ttyctl -f
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#testing update script 
+

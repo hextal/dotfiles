@@ -19,7 +19,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'christoomey/vim-tmux-navigator'
 "testing this one out 
-Plug 'benmills/vimux' " tmux integration for vim
+" Plug 'benmills/vimux' " tmux integration for vim
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -317,5 +317,3 @@ noremap <c-p> <Esc>:FZF<CR>
     \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
 \ }
     autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
-
-
