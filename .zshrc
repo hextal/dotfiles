@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
   export ZSH=/home/hassan/.oh-my-zsh
-source $HOME/.aliases
+  source $HOME/.aliases
 if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
     source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
@@ -86,18 +86,20 @@ source $ZSH/oh-my-zsh.sh
  alias zshconfig="nvim ~/.zshrc"
  alias ohmyzsh="nvim ~/.oh-my-zsh"
  alias vi="nvim"
+ alias vim="nvim"
+ alias chrome="google-chrome"
 
- fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
+#  fancy-ctrl-z () {
+#   if [[ $#BUFFER -eq 0 ]]; then
+#     BUFFER="fg"
+#     zle accept-line
+#   else
+#     zle push-input
+#     zle clear-screen
+#   fi
+# }
+# zle -N fancy-ctrl-z
+# bindkey '^Z' fancy-ctrl-z
 
 # eliminate delays
 # 10ms for key sequences
@@ -105,3 +107,12 @@ KEYTIMEOUT=1
 
 # vim key bindings
 # bindkey -v
+export PATH=$PATH:/usr/local/bin
+export PATH=/usr/local/share/npm/bin:$PATH
+# zsh
+alias vim="stty stop '' -ixoff ; vim"
+# `Frozing' tty, so after any command terminal settings will be restored
+ttyctl -f
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
