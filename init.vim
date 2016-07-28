@@ -37,11 +37,13 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
 Plug 'moll/vim-node', { 'for': 'javascript' } " node support
 Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
-Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+Plug 'mxw/vim-jsx' " JSX support
 Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
+
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
 
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
 
@@ -184,17 +186,6 @@ set hlsearch
 " noremap <leader>t :NERDTreeToggle<CR>
 " set a map leader for more key combos
 
-let g:neomake_javascript_jscs_maker = {
-    \ 'exe': 'jscs',
-    \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
-    \ 'errorformat': '%f: line %l\, col %c\, %m',
-    \ }
-let g:neomake_javascript_enabled_makers = ['jscs']
-
-let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-\ }
 let mapleader ="\<Space>"
 let g:mapleader = "\<Space>"
 set history=1000 " change history to 1000
@@ -358,11 +349,6 @@ autocmd BufNewFile,BufRead .jshintrc set filetype=json
 autocmd BufNewFile,BufRead .eslintrc set filetype=json
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 
-let g:neomake_javascript_jshint_maker = {
-      \ 'args': ['--verbose'],
-      \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-      \ }
-autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
@@ -392,6 +378,9 @@ nnoremap <leader>i :set cursorline!<cr>
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 let g:fzf_layout = { 'down': '~25%' }
 
-autocmd! BufWritePost,BufEnter * Neomake
-let g:neomake_verbose=3
-let g:neomake_logfile='/tmp/error.log'
+autocmd BufWritePost,BufEnter * Neomake
+autocmd InsertChange,TextChanged * update | Neomake
+let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
+
+set undodir=~/.config/nvim/undodir
+set undofile
