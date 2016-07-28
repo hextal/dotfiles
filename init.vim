@@ -25,14 +25,11 @@ Plug 'yannickcr/eslint-plugin-react'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'szw/vim-maximizer'
-" Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
 " language-specific plugins
-Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
-Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
-Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
+Plug 'mattn/emmet-vim' ,{ 'for': 'html'} " emmet support for vim - easily create markdup wth CSS-like syntax
+Plug 'gregsexton/MatchTag',{ 'for': 'html'} " match tags in html, similar to paren support
+Plug 'othree/html5.vim',{ 'for': 'html'} " html5 support
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
 Plug 'moll/vim-node', { 'for': 'javascript' } " node support
@@ -43,25 +40,11 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
 
-Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for presentating with vim
-
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
 
 Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
 "youcompleteme
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py
-  endif
-endfunction
-
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-
 "pair completion
 Plug 'raimondi/delimitmate'
 let delimitMate_expand_cr = 1
@@ -72,10 +55,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "tab completion
 Plug 'ervandew/supertab'
-
-
-
-
 "colorscheme
 Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim'
@@ -90,8 +69,6 @@ call plug#end()
 """""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
 colorscheme monokai
 " colorscheme dracula
-
-
 
 filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -132,8 +109,6 @@ set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 " colorscheme dracula
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
-" markdown to html
-nmap <leader>md :%!markdown --html4tags <cr>
 
 set number " show line numbers
 " set relativenumber " show relative line numbers
@@ -182,12 +157,6 @@ set hlsearch
 "paste toggle
 "set pastetoggle=<F2>
 """"""""""""""""""""""""""""""""""""""""
-"nerd tree toggle
-" noremap <leader>t :NERDTreeToggle<CR>
-" set a map leader for more key combos
-
-let mapleader ="\<Space>"
-let g:mapleader = "\<Space>"
 set history=1000 " change history to 1000
 set textwidth=120
 " code folding settings
@@ -262,7 +231,6 @@ let g:airline#extensions#whitespace#enabled = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=c
 
-
 " trying to get youcompleteme and snipmate to stop fighting
 " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
@@ -282,23 +250,13 @@ nnoremap <CR> :noh<CR><CR>
 "reload vim without closing
 nnoremap rv :source $MYVIMRC<CR>
 
-" let g:ctrlp_max_files=0
-" let g:ctrlp_working_path_mode = 0
-
 "save and restore sessions
 map <F7> :mksession! ~/vim_session <cr> " Quick write session with <F7>
 map <F8> :source ~/vim_session <cr>     " And load session with <F8>
 
-set splitbelow
-set splitright
-
 "remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
-
-"inset semicolon to end of the line
-inoremap <leader>; <C-o>A;
-inoremap <leader>, <C-o>A,
 " disable Ex mode
 noremap Q <NOP>
 " Disable stupid backup and swap files - they trigger too many events
@@ -321,25 +279,7 @@ nnoremap ; :
 nnoremap : ;
 nnoremap ' `
 nnoremap ` '
-"save with ctrl -s
-" If the current buffer has never been saved, it will have no name,
-" call the file browser to save it, otherwise just save it.
-" command -nargs=0 -bar Update if &modified
-"                            \|    if empty(bufname('%'))
-"                            \|        browse confirm write
-"                            \|    else
-"                            \|        confirm write
-"                            \|    endif
-"                            \|endif
-" nnoremap <silent> <C-S> :<C-u>Update<CR>
-" console.log word under cursor
-nmap <Leader>cl yiwoconsole.log('<c-r>"', <c-r>");<Esc>^
-nmap <Leader>se yiwoconsole.log("////////////////////////////////");<Esc>^
-
-"select newly pasted text
-nnoremap gv `[v`]
-"fzf to ctrl p
-noremap <c-p> <Esc>:FZF<CR>
+""""""""""""""""""""""""""""""fix file types"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "fix some file types
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 autocmd BufNewFile,BufRead *.ino set filetype=c
@@ -348,39 +288,46 @@ autocmd BufNewFile,BufRead .babelrc set filetype=json
 autocmd BufNewFile,BufRead .jshintrc set filetype=json
 autocmd BufNewFile,BufRead .eslintrc set filetype=json
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
-
-
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
-
-noremap <leader>t :tab all<Esc>
-noremap <leader>n :NERDTreeToggle<Esc>
-" :au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
-" :au VimEnter * tab all
-
 "turon on es6 syntax highlighting
 let g:jsx_ext_required = 0
-
-" shortcut to save
-nmap <leader>s :w<cr>
-" toggle paste mode
-map <leader>v :set paste!<cr>
-
-" toggle invisible characters
+"""""""""""""""""""""""""""""""""" toggle invisible characters"""""""""""""""""""""""""""""""""""""""'
 set list
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
 highlight NonText ctermbg=none ctermfg=8
 set showbreak=↪
-" toggle cursor line
+""""""""""""""""""""""""""""""""javascript linting with neomake"""""""""""""""""""""""""""""""""""""""""""
+autocmd BufWritePost,BufEnter * Neomake
+let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
+""""""""""""""""""""""""""""""""""""" LEADER KEY BINDINGS""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader ="\<Space>"
+let g:mapleader = "\<Space>"
+" markdown to html
+nmap <leader>md :%!markdown --html4tags <cr>
+"inset semicolon to end of the line
+inoremap <leader>; <C-o>A;
+inoremap <leader>, <C-o>A,
+inoremap <leader>. <C-o>A.
+inoremap <leader>] <C-o>A]
+inoremap <leader>} <C-o>A}
+inoremap <leader>) <C-o>A)
+inoremap <leader><space> <C-o>A<space>
+" console.log word under cursor
+nmap <Leader>cl yiwoconsole.log('<c-r>"', <c-r>");<Esc>^
+nmap <Leader>se yiwoconsole.log("////////////////////////////////");<Esc>^
+noremap <leader>t :tab all<Esc>
+noremap <leader>n :NERDTreeToggle<Esc>
+noremap <leader>d :r!date<Esc>
+
 nnoremap <leader>i :set cursorline!<cr>
 " search for word under the cursor
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+"""""""""""""""""""""""""""""""""""""""OTHER KEY BINDINGS""""""""""""""""""""""""""""""""""""""""""""""""
+" toggle cursor line
 let g:fzf_layout = { 'down': '~25%' }
-
-autocmd BufWritePost,BufEnter * Neomake
-autocmd InsertChange,TextChanged * update | Neomake
-let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
-
-set undodir=~/.config/nvim/undodir
-set undofile
+"select newly pasted text
+nnoremap gv `[v`]
+"fzf to ctrl p
+noremap <c-p> <Esc>:FZF<CR>
