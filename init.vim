@@ -12,14 +12,15 @@ Plug 'L9'
 Plug 'git://git.wincent.com/command-t.git'
 "tern javascript
 Plug 'ternjs/tern_for_vim'
-"nerd tree 
+"nerd tree
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'christoomey/vim-tmux-navigator'
-"testing this one out 
+"testing this one out
 " Plug 'benmills/vimux' " tmux integration for vim
+Plug 'yannickcr/eslint-plugin-react'
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -59,12 +60,12 @@ endfunction
 
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
-"pair completion 
+"pair completion
 Plug 'raimondi/delimitmate'
 let delimitMate_expand_cr = 1
 " Pass the path to set the runtimepath properly.
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
-"air line 
+"air line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "tab completion
@@ -85,32 +86,73 @@ let g:seiya_auto_enable=1
 
 call plug#end()
 """""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
-colorscheme monokai 
+colorscheme monokai
 " colorscheme dracula
 
 
 
 filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"relative line numbering 
-set relativenumber 
-set number 
+"relative line numbering
+set relativenumber
+" set number
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tabs and spaces
 set smarttab
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set title " set terminal title
+
+" Searching
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch
+set incsearch " set incremental search, like modern browsers
+set nolazyredraw " don't redraw while executing macros
+
+set magic " Set magic on, for regex
+
+set showmatch " show matching braces
+set mat=2 " how many tenths of a second to blink
+
+" error bells
+set noerrorbells
+set visualbell
+set t_vb=
+set tm=500
+
+" switch syntax highlighting on
+syntax on
+
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+" execute "colorscheme ".$THEME
+" colorscheme dracula
+highlight Comment cterm=italic
+highlight htmlArg cterm=italic
+" markdown to html
+nmap <leader>md :%!markdown --html4tags <cr>
+
+set number " show line numbers
+" set relativenumber " show relative line numbers
+
+set wrap "turn on line wrapping
+set wrapmargin=8 " wrap lines when coming within n characters from side
+set linebreak " set soft wrapping
+set showbreak=… " show ellipsis at breaking
+
+set autoindent " automatically set indent of new line
+set smartindent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""''
-"nerd tree cursor 
+"nerd tree cursor
 "autocmd VimEnter * NERDTree | wincmd p
 """""""""""""""""""""""""""""""""""""""""""""""""""""""'
-"close nerd tree 
+"close nerd tree
 function! NERDTreeQuit()
   redir => buffersoutput
   silent buffers
   redir END
-"                     1BufNo  2Mods.     3File           4LineNo
+  "                     1BufNo  2Mods.     3File           4LineNo
   let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
   let windowfound = 0
 
@@ -129,17 +171,7 @@ function! NERDTreeQuit()
   endif
 endfunction
 autocmd WinEnter * call NERDTreeQuit()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
- "move splits with hjkl keys 
-"     tnoremap <c-h> <C-\><C-n><C-w>h
-"     tnoremap <c-j> <C-\><C-n><C-w>j
-"     tnoremap <c-k> <C-\><C-n><C-w>k
-"     tnoremap <c-l> <C-\><C-n><C-w>l
-"     nnoremap <c-h> <C-w>h
-"     nnoremap <c-j> <C-w>j
-"     nnoremap <c-k> <C-w>k
-"     nnoremap <c-l> <C-w>l
-"""""""""""""""""""""""""""""""""""""""""""
+
 " Ali: to indent json files on save
 autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
 "high light search results
@@ -149,10 +181,22 @@ set hlsearch
 "set pastetoggle=<F2>
 """"""""""""""""""""""""""""""""""""""""
 "nerd tree toggle
-map <F1> :NERDTreeToggle<CR>
+" noremap <leader>t :NERDTreeToggle<CR>
 " set a map leader for more key combos
- let mapleader ="\<Space>" 
- let g:mapleader = "\<Space>"
+
+let g:neomake_javascript_jscs_maker = {
+    \ 'exe': 'jscs',
+    \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
+    \ 'errorformat': '%f: line %l\, col %c\, %m',
+    \ }
+let g:neomake_javascript_enabled_makers = ['jscs']
+
+let g:neomake_javascript_jshint_maker = {
+    \ 'args': ['--verbose'],
+    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+\ }
+let mapleader ="\<Space>"
+let g:mapleader = "\<Space>"
 set history=1000 " change history to 1000
 set textwidth=120
 " code folding settings
@@ -179,9 +223,9 @@ syntax enable
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256
 if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-    set t_AB=^[[48;5;%dm
-    set t_AF=^[[38;5;%dm
+  set t_Co=256
+  set t_AB=^[[48;5;%dm
+  set t_AF=^[[38;5;%dm
 endif
 
 set background=dark
@@ -192,7 +236,7 @@ set smartindent
 set laststatus=2 " show the satus line all the time
 " show hidden files in NERDTree
 "let NERDTreeShowHidden=1
-"tern stuff 
+"tern stuff
 let g:tern_map_keys=1
 let g:tern_show_argument_hints='on_hold'
 " enable line numbers
@@ -203,7 +247,7 @@ autocmd FileType nerdtree setlocal relativenumber
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 "auto complete html shit
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-"copy into clipboard 
+"copy into clipboard
 set clipboard=unnamed
 
 " faster redrawing
@@ -215,7 +259,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 """"""""""""""""""""""""""""""""''''"powerline/airline""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set noshowmode
-set guifont=Liberation\ Mono\ for\ Powerline\ 10 
+set guifont=Liberation\ Mono\ for\ Powerline\ 10
 let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 if !exists('g:airline_symbols')
@@ -229,7 +273,7 @@ set mouse=c
 
 
 " trying to get youcompleteme and snipmate to stop fighting
-  " YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
 let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
 
@@ -242,15 +286,15 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " highlight Pmenu guibg=brown gui=bold
 " highlight Pmenu ctermbg=238 gui=bold
 " hi Normal ctermbg=none
-"disable search highlighting 
+"disable search highlighting
 nnoremap <CR> :noh<CR><CR>
 "reload vim without closing
 nnoremap rv :source $MYVIMRC<CR>
 
-let g:ctrlp_max_files=0
-let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_max_files=0
+" let g:ctrlp_working_path_mode = 0
 
-"save and restore sessions 
+"save and restore sessions
 map <F7> :mksession! ~/vim_session <cr> " Quick write session with <F7>
 map <F8> :source ~/vim_session <cr>     " And load session with <F8>
 
@@ -258,10 +302,12 @@ set splitbelow
 set splitright
 
 "remove trailing whitespaces
-autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
-"inset semicolon to end of the line 
+
+"inset semicolon to end of the line
 inoremap <leader>; <C-o>A;
+inoremap <leader>, <C-o>A,
 " disable Ex mode
 noremap Q <NOP>
 " Disable stupid backup and swap files - they trigger too many events
@@ -272,7 +318,7 @@ set noswapfile
 " make yank copy to the global system clipboard
 set clipboard=unnamed
 
-"move in insert mode 
+"move in insert mode
 inoremap <a-h> <left>
 inoremap <a-j> <down>
 inoremap <a-k> <up>
@@ -287,7 +333,7 @@ nnoremap ` '
 "save with ctrl -s
 " If the current buffer has never been saved, it will have no name,
 " call the file browser to save it, otherwise just save it.
-" command -nargs=0 -bar Update if &modified 
+" command -nargs=0 -bar Update if &modified
 "                            \|    if empty(bufname('%'))
 "                            \|        browse confirm write
 "                            \|    else
@@ -301,19 +347,51 @@ nmap <Leader>se yiwoconsole.log("////////////////////////////////");<Esc>^
 
 "select newly pasted text
 nnoremap gv `[v`]
-"fzf to ctrl p 
+"fzf to ctrl p
 noremap <c-p> <Esc>:FZF<CR>
 "fix some file types
-    autocmd BufNewFile,BufRead *.ejs set filetype=html
-    autocmd BufNewFile,BufRead *.ino set filetype=c
-    autocmd BufNewFile,BufRead *.svg set filetype=xml
-    autocmd BufNewFile,BufRead .babelrc set filetype=json
-    autocmd BufNewFile,BufRead .jshintrc set filetype=json
-    autocmd BufNewFile,BufRead .eslintrc set filetype=json
-    autocmd BufNewFile,BufRead *.es6 set filetype=javascript
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+autocmd BufNewFile,BufRead *.ino set filetype=c
+autocmd BufNewFile,BufRead *.svg set filetype=xml
+autocmd BufNewFile,BufRead .babelrc set filetype=json
+autocmd BufNewFile,BufRead .jshintrc set filetype=json
+autocmd BufNewFile,BufRead .eslintrc set filetype=json
+autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 
-    let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-\ }
-    autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
+let g:neomake_javascript_jshint_maker = {
+      \ 'args': ['--verbose'],
+      \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
+      \ }
+autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
+
+" don't hide quotes in json files
+let g:vim_json_syntax_conceal = 0
+
+noremap <leader>t :tab all<Esc>
+noremap <leader>n :NERDTreeToggle<Esc>
+" :au VimEnter * set tabpagemax=9999|sil tab ball|set tabpagemax&vim
+" :au VimEnter * tab all
+
+"turon on es6 syntax highlighting
+let g:jsx_ext_required = 0
+
+" shortcut to save
+nmap <leader>s :w<cr>
+" toggle paste mode
+map <leader>v :set paste!<cr>
+
+" toggle invisible characters
+set list
+set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
+highlight NonText ctermbg=none ctermfg=8
+set showbreak=↪
+" toggle cursor line
+nnoremap <leader>i :set cursorline!<cr>
+" search for word under the cursor
+nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+let g:fzf_layout = { 'down': '~25%' }
+
+autocmd! BufWritePost,BufEnter * Neomake
+let g:neomake_verbose=3
+let g:neomake_logfile='/tmp/error.log'
