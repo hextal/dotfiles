@@ -314,10 +314,25 @@ inoremap <leader>] <c-o>A]
 inoremap <leader>} <c-o>A}
 inoremap <leader>) <c-o>A)
 inoremap <leader><space> <c-o>A
+
+nnoremap <leader>h :tabprevious<CR>
+nnoremap <leader>l :tabnext<CR>
+nnoremap <C-t>     :tabnew<CR>
+nnoremap <C-w>     :tabclose<CR>
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
+
 " console.log word under cursor
 nmap <leader>cl yiwoconsole.log('<c-r>"', <c-r>");<esc>^
 nmap <leader>se yiwoconsole.log("////////////////////////////////");<esc>^
-noremap <leader>t :tab all<esc>
+" noremap <leader>t :tab all<esc>
 " noremap <leader>n :nerdtreetoggle<esc>
 noremap <leader>d :r!date<esc>
 noremap <leader>s :w !sudo tee %<esc>
@@ -337,3 +352,6 @@ noremap <c-p> <Esc>:FZF<CR>
 set undofile
 " set a directory to store the undo history
 set undodir=~/.config/nvim/undodir
+"open all files in their own tab
+:au BufAdd,BufNewFile,BufRead * nested tab sball
+
