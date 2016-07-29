@@ -27,9 +27,9 @@ Plug 'honza/vim-snippets'
 Plug 'szw/vim-maximizer'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
 " language-specific plugins
-Plug 'mattn/emmet-vim' ,{ 'for': 'html'} " emmet support for vim - easily create markdup wth CSS-like syntax
-Plug 'gregsexton/MatchTag',{ 'for': 'html'} " match tags in html, similar to paren support
-Plug 'othree/html5.vim',{ 'for': 'html'} " html5 support
+Plug 'mattn/emmet-vim' ,{ 'for': ['html','javascript']} " emmet support for vim - easily create markdup wth CSS-like syntax
+Plug 'gregsexton/MatchTag',{ 'for': ['html','javascript']} " match tags in html, similar to paren support
+Plug 'othree/html5.vim',{ 'for': ['html','javascript']} " html5 support
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
 Plug 'moll/vim-node', { 'for': 'javascript' } " node support
@@ -307,19 +307,21 @@ let g:mapleader = "\<Space>"
 " markdown to html
 nmap <leader>md :%!markdown --html4tags <cr>
 "inset semicolon to end of the line
-inoremap <leader>; <C-o>A;
-inoremap <leader>, <C-o>A,
-inoremap <leader>. <C-o>A.
-inoremap <leader>] <C-o>A]
-inoremap <leader>} <C-o>A}
-inoremap <leader>) <C-o>A)
-inoremap <leader><space> <C-o>A<space>
+inoremap <leader>; <c-o>A;
+inoremap <leader>, <c-o>A,
+inoremap <leader>. <c-o>A.
+inoremap <leader>] <c-o>A]
+inoremap <leader>} <c-o>A}
+inoremap <leader>) <c-o>A)
+inoremap <leader><space> <c-o>A
 " console.log word under cursor
-nmap <Leader>cl yiwoconsole.log('<c-r>"', <c-r>");<Esc>^
-nmap <Leader>se yiwoconsole.log("////////////////////////////////");<Esc>^
-noremap <leader>t :tab all<Esc>
-noremap <leader>n :NERDTreeToggle<Esc>
-noremap <leader>d :r!date<Esc>
+nmap <leader>cl yiwoconsole.log('<c-r>"', <c-r>");<esc>^
+nmap <leader>se yiwoconsole.log("////////////////////////////////");<esc>^
+noremap <leader>t :tab all<esc>
+" noremap <leader>n :nerdtreetoggle<esc>
+noremap <leader>d :r!date<esc>
+noremap <leader>s :w !sudo tee %<esc>
+noremap <leader>q :s/\'\(.*\)\'/\"\1\"<esc>
 
 nnoremap <leader>i :set cursorline!<cr>
 " search for word under the cursor
@@ -331,3 +333,7 @@ let g:fzf_layout = { 'down': '~25%' }
 nnoremap gv `[v`]
 "fzf to ctrl p
 noremap <c-p> <Esc>:FZF<CR>
+" tell it to use an undo file
+set undofile
+" set a directory to store the undo history
+set undodir=~/.config/nvim/undodir
