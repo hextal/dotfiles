@@ -317,8 +317,8 @@ inoremap <leader><space> <c-o>A
 
 nnoremap <leader>h :tabprevious<CR>
 nnoremap <leader>l :tabnext<CR>
-nnoremap <C-t>     :tabnew<CR>
-nnoremap <C-w>     :tabclose<CR>
+nnoremap <leader>t :tabnew<CR>
+nnoremap <leader>w :tabclose<CR>
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
@@ -338,14 +338,15 @@ noremap <leader>d :r!date<esc>
 noremap <leader>s :w !sudo tee %<esc>
 noremap <leader>q :s/\'\(.*\)\'/\"\1\"<esc>
 
-nnoremap <leader>i :set cursorline!<cr>
+" nnoremap <leader>i :set cursorline!<cr>
+set cursorline
 " search for word under the cursor
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 """""""""""""""""""""""""""""""""""""""OTHER KEY BINDINGS""""""""""""""""""""""""""""""""""""""""""""""""
 " toggle cursor line
 let g:fzf_layout = { 'down': '~25%' }
 "select newly pasted text
-nnoremap gv `[v`]
+nnoremap gV `[v`]
 "fzf to ctrl p
 noremap <c-p> <Esc>:FZF<CR>
 " tell it to use an undo file
