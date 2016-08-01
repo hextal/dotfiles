@@ -12,8 +12,6 @@ Plug 'L9'
 Plug 'git://git.wincent.com/command-t.git'
 "tern javascript
 Plug 'ternjs/tern_for_vim'
-"nerd tree
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
@@ -58,9 +56,11 @@ Plug 'ervandew/supertab'
 "colorscheme
 Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim'
-
+Plug 'mhartington/oceanic-next'
 "transparency
 Plug  'miyakogi/seiya.vim'
+
+Plug 'chriskempson/vim-tomorrow-theme'
 " Default value: ['ctermbg']
 let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
 let g:seiya_auto_enable=1
@@ -68,6 +68,7 @@ let g:seiya_auto_enable=1
 call plug#end()
 """""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
 colorscheme monokai
+" colorscheme monokai
 " colorscheme dracula
 
 filetype plugin indent on    " required
@@ -122,32 +123,7 @@ set autoindent " automatically set indent of new line
 set smartindent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""''
 "nerd tree cursor
-"autocmd VimEnter * NERDTree | wincmd p
 """""""""""""""""""""""""""""""""""""""""""""""""""""""'
-"close nerd tree
-function! NERDTreeQuit()
-  redir => buffersoutput
-  silent buffers
-  redir END
-  "                     1BufNo  2Mods.     3File           4LineNo
-  let pattern = '^\s*\(\d\+\)\(.....\) "\(.*\)"\s\+line \(\d\+\)$'
-  let windowfound = 0
-
-  for bline in split(buffersoutput, "\n")
-    let m = matchlist(bline, pattern)
-
-    if (len(m) > 0)
-      if (m[2] =~ '..a..')
-        let windowfound = 1
-      endif
-    endif
-  endfor
-
-  if (!windowfound)
-    quitall
-  endif
-endfunction
-autocmd WinEnter * call NERDTreeQuit()
 
 " Ali: to indent json files on save
 autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
@@ -194,15 +170,11 @@ set autoindent " automatically set indent of new line
 set smartindent
 
 set laststatus=2 " show the satus line all the time
-" show hidden files in NERDTree
-"let NERDTreeShowHidden=1
 "tern stuff
 let g:tern_map_keys=1
 let g:tern_show_argument_hints='on_hold'
 " enable line numbers
-let NERDTreeShowLineNumbers=1
 " make sure relative line numbers are used
-autocmd FileType nerdtree setlocal relativenumber
 "set completeopt-=preview
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 "auto complete html shit
@@ -328,20 +300,26 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
-
+map <leader>o o<ESC>
+map <leader>O O<ESC>
 " console.log word under cursor
 nmap <leader>cl yiwoconsole.log('<c-r>"', <c-r>");<esc>^
 nmap <leader>se yiwoconsole.log("////////////////////////////////");<esc>^
 " noremap <leader>t :tab all<esc>
-" noremap <leader>n :nerdtreetoggle<esc>
 noremap <leader>d :r!date<esc>
+noremap <leader>n :E<esc>
 noremap <leader>s :w !sudo tee %<esc>
-noremap <leader>q :s/\'\(.*\)\'/\"\1\"<esc>
+noremap <leader>q :s/\"\(.*\)\"/\'\1\'<esc>
 
-" nnoremap <leader>i :set cursorline!<cr>
-set cursorline
 " search for word under the cursor
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+vmap <leader>" S"lvi"
+vmap <leader>' S'lvi'
+vmap <leader>` S`lvi`
+vmap <leader>( S)lvi(
+vmap <leader>{ S}lvi{
+vmap <leader>[ S]lvi[
+vmap <leader>< S>lvi<
 """""""""""""""""""""""""""""""""""""""OTHER KEY BINDINGS""""""""""""""""""""""""""""""""""""""""""""""""
 " toggle cursor line
 let g:fzf_layout = { 'down': '~25%' }
@@ -354,5 +332,12 @@ set undofile
 " set a directory to store the undo history
 set undodir=~/.config/nvim/undodir
 "open all files in their own tab
-:au BufAdd,BufNewFile,BufRead * nested tab sball
-
+" :au BufAdd,BufNewFile,BufRead * nested tab sball
+" :au BufNewFile,BufRead * nested tab sball
+au BufNewFile,BufRead * nested
+  \ if &buftype != "help" |
+  \   tab sball |
+  \ endif
+" :hi TabLineFill term=bold cterm=bold ctermbg=0
+set cursorline
+let g:netrw_liststyle=3
