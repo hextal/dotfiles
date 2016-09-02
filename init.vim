@@ -9,7 +9,7 @@ Plug 'tpope/vim-fugitive'
 " plugin from http://vim-scripts.org/vim/scripts.html
 Plug 'L9'
 " Git plugin not hosted on GitHub
-Plug 'git://git.wincent.com/command-t.git'
+" Plug 'git://git.wincent.com/command-t.git'
 "tern javascript
 Plug 'ternjs/tern_for_vim'
 
@@ -23,7 +23,8 @@ Plug 'yannickcr/eslint-plugin-react'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'szw/vim-maximizer'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 " language-specific plugins
 Plug 'mattn/emmet-vim' ,{ 'for': ['html','javascript']} " emmet support for vim - easily create markdup wth CSS-like syntax
 Plug 'gregsexton/MatchTag',{ 'for': ['html','javascript']} " match tags in html, similar to paren support
@@ -62,8 +63,8 @@ Plug  'miyakogi/seiya.vim'
 
 Plug 'chriskempson/vim-tomorrow-theme'
 " Default value: ['ctermbg']
-let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
-let g:seiya_auto_enable=1
+" let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
+" let g:seiya_auto_enable=1
 
 call plug#end()
 """""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
@@ -165,7 +166,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 set background=dark
-set termguicolors
+" set termguicolors
 set autoindent " automatically set indent of new line
 set smartindent
 
@@ -341,3 +342,5 @@ au BufNewFile,BufRead * nested
 " :hi TabLineFill term=bold cterm=bold ctermbg=0
 set cursorline
 let g:netrw_liststyle=3
+
+:let g:AirlineTheme='durant'

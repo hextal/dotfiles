@@ -1,3 +1,7 @@
+export TERM=xterm-256color
+if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
+    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
+fi
 # Path to your oh-my-zsh installation.
   export ZSH=/home/hassan/.oh-my-zsh
   source $HOME/.aliases
@@ -115,6 +119,11 @@ alias vim="stty stop '' -ixoff ; vim"
 ttyctl -f
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #testing update script 
 
+
+
+
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
