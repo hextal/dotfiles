@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cp ~/.config/nvim/init.vim .
-cp ~/.vim .
+cp ~/.vimrc .
 cp ~/.zshrc .
 cp ~/.tmux.conf .
 git add *
