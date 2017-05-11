@@ -4,51 +4,18 @@ Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'tmhedberg/matchit'
 Plug 'freeo/vim-kalisi'
-" plugin on GitHub repo
+"plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plug 'L9'
-" Git plugin not hosted on GitHub
-" Plug 'git://git.wincent.com/command-t.git'
-"tern javascript
-Plug 'ternjs/tern_for_vim'
-
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
 Plug 'christoomey/vim-tmux-navigator'
-"testing this one out
-" Plug 'benmills/vimux' " tmux integration for vim
-Plug 'yannickcr/eslint-plugin-react'
-
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'szw/vim-maximizer'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
-" language-specific plugins
-Plug 'mattn/emmet-vim' ,{ 'for': ['html','javascript']} " emmet support for vim - easily create markdup wth CSS-like syntax
-Plug 'gregsexton/MatchTag',{ 'for': ['html','javascript']} " match tags in html, similar to paren support
-Plug 'othree/html5.vim',{ 'for': ['html','javascript']} " html5 support
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
-Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
-Plug 'moll/vim-node', { 'for': 'javascript' } " node support
-Plug 'othree/yajs.vim', { 'for': 'javascript' } " JavaScript syntax plugin
-Plug 'mxw/vim-jsx' " JSX support
-Plug 'elzr/vim-json', { 'for': 'json' } " JSON support
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' } " sass scss syntax support
-Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
-Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
-
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' } " ES6 and beyond syntax
-
-Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
 "youcompleteme
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 "pair completion
 Plug 'raimondi/delimitmate'
 let delimitMate_expand_cr = 1
-" Pass the path to set the runtimepath properly.
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 "air line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -58,25 +25,11 @@ Plug 'ervandew/supertab'
 Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim'
 Plug 'mhartington/oceanic-next'
-"transparency
-Plug  'miyakogi/seiya.vim'
-
-Plug 'chriskempson/vim-tomorrow-theme'
-" Default value: ['ctermbg']
-" let g:seiya_target_groups = has('nvim') ? ['guibg'] : ['ctermbg']
-" let g:seiya_auto_enable=1
-
 call plug#end()
-"""""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
-colorscheme monokai
-" colorscheme monokai
-" colorscheme dracula
-
-filetype plugin indent on    " required
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "relative line numbering
 set relativenumber
-" set number
+set number
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tabs and spaces
 set smarttab
@@ -104,29 +57,12 @@ set t_vb=
 set tm=500
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-" execute "colorscheme ".$THEME
-" colorscheme dracula
-highlight Comment cterm=italic
-highlight htmlArg cterm=italic
-
-set number " show line numbers
-" set relativenumber " show relative line numbers
-
 set wrap "turn on line wrapping
 set wrapmargin=8 " wrap lines when coming within n characters from side
 set linebreak " set soft wrapping
 set showbreak=… " show ellipsis at breaking
-
 set autoindent " automatically set indent of new line
 set smartindent
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""''
-" Ali: to indent json files on save
-autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
-"high light search results
-set hlsearch
-""""""""""""""""""""""""""""""""""""""""
-"paste toggle
-"set pastetoggle=<F2>
 """"""""""""""""""""""""""""""""""""""""
 set history=1000 " change history to 1000
 set textwidth=120
@@ -135,48 +71,6 @@ set foldmethod=syntax " fold based on indent
 set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => User Interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Searching
-set ignorecase " case insensitive searching
-set smartcase " case-sensitive if expresson contains a capital letter
-set hlsearch
-set incsearch " set incremental search, like modern browsers
-set nolazyredraw " don't redraw while executing macros
-
-"set encoding=utf8
-let base16colorspace=256  " Access colors present in 256 colorspace"
-set t_Co=256
-if $COLORTERM == 'gnome-terminal'
-  set t_Co=256
-  set t_AB=^[[48;5;%dm
-  set t_AF=^[[38;5;%dm
-endif
-
-set background=dark
-" set termguicolors
-
-set laststatus=2 " show the satus line all the time
-"tern stuff
-let g:tern_map_keys=1
-let g:tern_show_argument_hints='on_hold'
-" enable line numbers
-" make sure relative line numbers are used
-"set completeopt-=preview
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-"auto complete html shit
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
-" faster redrawing
-set ttyfast
-
-set diffopt+=vertical
-
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
 """"""""""""""""""""""""""""""""''''"powerline/airline""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set noshowmode
 set guifont=Liberation\ Mono\ for\ Powerline\ 10
@@ -188,7 +82,6 @@ endif
 let g:airline_symbols.space = "\ua0"
 let g:bufferline_echo = 0
 let g:airline#extensions#whitespace#enabled = 0
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=c
 
 " trying to get youcompleteme and snipmate to stop fighting
@@ -258,9 +151,6 @@ set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
 highlight NonText ctermbg=none ctermfg=8
 set showbreak=↪
-""""""""""""""""""""""""""""""""javascript linting with neomake"""""""""""""""""""""""""""""""""""""""""""
-autocmd BufWritePost,BufEnter * Neomake
-let g:neomake_javascript_enabled_makers = ['jshint', 'jscs', 'eslint']
 """"""""""""""""""""""""""""""""""""" LEADER KEY BINDINGS""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader ="\<Space>"
 let g:mapleader = "\<Space>"
@@ -330,5 +220,4 @@ au BufNewFile,BufRead * nested
 set cursorline
 let g:netrw_liststyle=3
 
-endif
 :let g:AirlineTheme='durant'

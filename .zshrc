@@ -1,18 +1,14 @@
-export TERM=xterm-256color
-if [[ -r /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/zsh/powerline.zsh
-fi
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/hassan/.oh-my-zsh
-  source $HOME/.aliases
-if [[ -r ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh ]]; then
-    source ~/.local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
-fi
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+export ZSH=/Users/hassantalpur/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="agnoster"
+# ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -58,28 +54,27 @@ ZSH_THEME="agnoster"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+source $ZSH/oh-my-zsh.sh
+
 # User configuration
 
-  export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='mvim'
- fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -87,43 +82,7 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
- alias zshconfig="nvim ~/.zshrc"
- alias ohmyzsh="nvim ~/.oh-my-zsh"
- alias vi="nvim"
- alias vim="nvim"
- alias chrome="google-chrome"
-
-#  fancy-ctrl-z () {
-#   if [[ $#BUFFER -eq 0 ]]; then
-#     BUFFER="fg"
-#     zle accept-line
-#   else
-#     zle push-input
-#     zle clear-screen
-#   fi
-# }
-# zle -N fancy-ctrl-z
-# bindkey '^Z' fancy-ctrl-z
-
-# eliminate delays
-# 10ms for key sequences
-KEYTIMEOUT=1
-
-# vim key bindings
-# bindkey -v
-export PATH=$PATH:/usr/local/bin
-export PATH=/usr/local/share/npm/bin:$PATH
-# zsh
-alias vim="stty stop '' -ixoff ; vim"
-# `Frozing' tty, so after any command terminal settings will be restored
-ttyctl -f
-
-
-#testing update script 
-
-
-
-
-
-
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
