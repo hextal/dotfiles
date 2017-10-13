@@ -4,6 +4,7 @@ Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
 Plug 'tmhedberg/matchit'
 Plug 'freeo/vim-kalisi'
+Plug 'scrooloose/nerdtree'
 "plugin on GitHub repo
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
@@ -205,17 +206,13 @@ let g:fzf_layout = { 'down': '~25%' }
 nnoremap gV `[v`]
 "fzf to ctrl p
 noremap <c-p> <Esc>:FZF<CR>
-" tell it to use an undo file
-set undofile
-" set a directory to store the undo history
-set undodir=~/.undodir
 "open all files in their own tab
 " :au BufAdd,BufNewFile,BufRead * nested tab sball
 " :au BufNewFile,BufRead * nested tab sball
-au BufNewFile,BufRead * nested
-  \ if &buftype != "help" |
-  \   tab sball |
-  \ endif
+"au BufNewFile,BufRead * nested
+  "\ if &buftype != "help" |
+  "\   tab sball |
+  "\ endif
 " :hi TabLineFill term=bold cterm=bold ctermbg=0
 set cursorline
 let g:netrw_liststyle=3
