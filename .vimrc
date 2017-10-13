@@ -1,4 +1,4 @@
-call plug#begin('~/config/nvim/plugged')
+call plug#begin('~/vim-plugins/plugged')
 
 Plug 'tpope/vim-surround'
 Plug 'tomtom/tcomment_vim'
