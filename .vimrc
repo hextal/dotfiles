@@ -17,9 +17,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 "pair completion
 Plug 'raimondi/delimitmate'
 let delimitMate_expand_cr = 1
-"air line
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 "tab completion
 Plug 'ervandew/supertab'
 "colorscheme
@@ -33,10 +30,10 @@ set relativenumber
 set number
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tabs and spaces
-set smarttab
-set tabstop=2
-set shiftwidth=2
-set expandtab
+" set smarttab
+" set tabstop=2
+" set shiftwidth=2
+" set expandtab
 set title " set terminal title
 
 " Searching
@@ -72,17 +69,6 @@ set foldmethod=syntax " fold based on indent
 set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
-""""""""""""""""""""""""""""""""''''"powerline/airline""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set noshowmode
-set guifont=Liberation\ Mono\ for\ Powerline\ 10
-let g:airline_powerline_fonts = 1
-let g:airline_theme='powerlineish'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:bufferline_echo = 0
-let g:airline#extensions#whitespace#enabled = 0
 set mouse=c
 
 " trying to get youcompleteme and snipmate to stop fighting
@@ -96,17 +82,7 @@ let g:SuperTabCrMapping                = 0
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-" highlight Pmenu guibg=brown gui=bold
-" highlight Pmenu ctermbg=238 gui=bold
-" hi Normal ctermbg=none
-"disable search highlighting
-nnoremap <CR> :noh<CR><CR>
-"reload vim without closing
-nnoremap rv :source $MYVIMRC<CR>
 
-"save and restore sessions
-map <F7> :mksession! ~/vim_session <cr> " Quick write session with <F7>
-map <F8> :source ~/vim_session <cr>     " And load session with <F8>
 
 "remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
@@ -120,12 +96,6 @@ set nowritebackup
 set noswapfile
 " make yank copy to the global system clipboard
 set clipboard=unnamed
-
-"move in insert mode
-inoremap <a-h> <left>
-inoremap <a-j> <down>
-inoremap <a-k> <up>
-inoremap <a-l> <right>
 
 "stop delays
 set timeoutlen=1000 ttimeoutlen=0
@@ -157,7 +127,7 @@ let mapleader ="\<Space>"
 let g:mapleader = "\<Space>"
 " markdown to html
 nmap <leader>md :%!markdown --html4tags <cr>
-"inset semicolon to end of the line
+"insert semicolon to end of the line
 inoremap <leader>; <c-o>A;
 inoremap <leader>, <c-o>A,
 inoremap <leader>. <c-o>A.
@@ -179,11 +149,14 @@ nnoremap <leader>6 6gt
 nnoremap <leader>7 7gt
 nnoremap <leader>8 8gt
 nnoremap <leader>9 9gt
+
+" insert line without entering insert mode
 map <leader>o o<ESC>
 map <leader>O O<ESC>
+
 " console.log word under cursor
 nmap <leader>cl yiwoconsole.log('<c-r>"', <c-r>");<esc>^
-nmap <leader>se yiwoconsole.log("////////////////////////////////");<esc>^
+
 " noremap <leader>t :tab all<esc>
 noremap <leader>d :r!date<esc>
 noremap <leader>n :E<esc>
@@ -192,6 +165,7 @@ noremap <leader>q :s/\"\(.*\)\"/\'\1\'<esc>
 
 " search for word under the cursor
 nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+"vim surround shortcuts
 vmap <leader>" S"lvi"
 vmap <leader>' S'lvi'
 vmap <leader>` S`lvi`
@@ -202,19 +176,12 @@ vmap <leader>< S>lvi<
 """""""""""""""""""""""""""""""""""""""OTHER KEY BINDINGS""""""""""""""""""""""""""""""""""""""""""""""""
 " toggle cursor line
 let g:fzf_layout = { 'down': '~25%' }
+
 "select newly pasted text
 nnoremap gV `[v`]
+
 "fzf to ctrl p
 noremap <c-p> <Esc>:FZF<CR>
-"open all files in their own tab
-" :au BufAdd,BufNewFile,BufRead * nested tab sball
-" :au BufNewFile,BufRead * nested tab sball
-"au BufNewFile,BufRead * nested
-  "\ if &buftype != "help" |
-  "\   tab sball |
-  "\ endif
-" :hi TabLineFill term=bold cterm=bold ctermbg=0
-set cursorline
+
 let g:netrw_liststyle=3
 
-:let g:AirlineTheme='durant'
