@@ -1,6 +1,7 @@
 call plug#begin('~/vim-plugins/plugged')
 
 Plug 'tpope/vim-surround'
+Plug 'posva/vim-vue'
 Plug 'tomtom/tcomment_vim'
 Plug 'tmhedberg/matchit'
 Plug 'freeo/vim-kalisi'
@@ -20,11 +21,17 @@ let delimitMate_expand_cr = 1
 "tab completion
 Plug 'ervandew/supertab'
 "colorscheme
+Plug 'dracula/vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'dracula/vim'
 Plug 'mhartington/oceanic-next'
+" Plug 'kadekillary/subtle_dark'
 call plug#end()
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set background=dark
+colorscheme monokai
+
 "relative line numbering
 set relativenumber
 set number
