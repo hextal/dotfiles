@@ -33,6 +33,11 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'ncm2/ncm2-vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+"language servers
+Plug 'ryanolsonx/vim-lsp-typescript'
+
+Plug 'rust-lang/rust.vim'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins'}
 
 call plug#end()
 """""""""""""""""""""""""""""""""color schemes"""""""""""""""""""""""""""""""""""""""""""
@@ -170,3 +175,34 @@ noremap <c-p> <Esc>:FZF<CR>
 let g:netrw_liststyle=3
 
 :let g:AirlineTheme='durant'
+
+
+"""""""""""""""""""""""""""""""""""""""Language Server Settings""""""""""""""""""""""""""""""""""""""""""""""""
+" TypeScript
+" if executable('typescript-language-server')
+" au User lsp_setup call lsp#register_server({
+"       \ 'name': 'typescript-language-server',
+"       \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+"       \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+"       \ 'whitelist': ['typescript', 'typescript.tsx'],
+"       \})
+" endif
+"
+" Rust
+autocmd BufReadPost *.rs setlocal filetype=rust
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+"
+let g:LanguageClient_serverCommands = {
+      \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+\}
+
+"" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Maps K to hover, gd to goto definition, F2 to rename
+nnoremap <silent> K :call LanguageClient_textDocument_hover()
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()
+" }
