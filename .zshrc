@@ -106,9 +106,12 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
  alias vi="nvim"
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+ alias viconfig="vi ~/.config/nvim/"
+ alias spa="cd ~/workrepos/SPA/"
+ alias pages="cd ~/workrepos/SPA/projects/pages/"
+ alias registration="cd ~/workrepos/SPA/projects/pages/src/app/registration/"
+ alias credentials="cd ~/workrepos/SPA/projects/pages/src/app/credentials/"
+ alias cdnvim="cd ~/.config/nvim"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -117,6 +120,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+export NVS_HOME="$HOME/.nvs"
+[ -s "$NVS_HOME/nvs.sh" ] && . "$NVS_HOME/nvs.sh"
+
+eval "$(zoxide init bash)"
+
+if [ -e /home/hassan/.nix-profile/etc/profile.d/nix.sh ]; then . /home/hassan/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
