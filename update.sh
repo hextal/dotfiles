@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp ~/.config/nvim/init.vim .
+cp -r ~/.config/nvim/
 cp ~/.vimrc .
 cp ~/.zshrc .
 cp ~/.tmux.conf .
